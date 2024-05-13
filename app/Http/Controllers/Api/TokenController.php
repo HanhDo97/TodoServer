@@ -34,15 +34,23 @@ class TokenController extends Controller
 
             GetTokenEvent::dispatch($user);
             
-            $dateTime = Carbon::now();
-            $oneMinuteAfter = $dateTime->addMinutes(1);
+            $dateTime       = Carbon::now();
+            $tenMinuteAfter = $dateTime->addMinutes(1);
 
             return $this->successResponse([
                 // add expires after one minitue
-                'token' => $user->createToken('access-token', $ablities, $oneMinuteAfter)->plainTextToken
+                'token' => $user->createToken('access-token', $ablities, $tenMinuteAfter)->plainTextToken
             ]);
         } catch (Exception $e) {
             return $this->errorResponse($e->getMessage());
         }
+    }
+
+    public function revokeToken(Request $request){
+        $user = $request->user();
+
+        $user->currentAccessToken()->delete();
+
+        return $this->successResponse([]);
     }
 }
