@@ -21,7 +21,7 @@ return [
 
     'allowed_origins' => [
         'http://todo.app.web:5173',
-        'http://207.148.102.135:5173',
+        'http://207.148.102.135',
         'http://localhost:5173'
     ],
 
