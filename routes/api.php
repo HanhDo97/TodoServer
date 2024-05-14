@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\TodoController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -20,3 +21,7 @@ Route::prefix('token')->middleware('auth:sanctum')->group(function () {
 Route::prefix('user')->middleware('auth:sanctum')->group(function () {
     Route::get('/get', [UserController::class, 'getInfor']);
 });
+
+Route::resource('todos', TodoController::class)
+    ->middleware('auth:sanctum')
+    ->middleware('ability:full-access');

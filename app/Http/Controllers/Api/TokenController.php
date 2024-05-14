@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Enums\Abilities;
+use App\Enums\Privilege;
 use App\Events\GetTokenEvent;
 use App\Exceptions\TokenException;
 use App\Http\Controllers\Controller;
@@ -26,7 +27,7 @@ class TokenController extends Controller
             }
 
             $ablities = [];
-            if ($user->privilege_id == 1) {
+            if ($user->privilege_id == Privilege::Highest) {
                 $ablities = [Abilities::fullAccess()];
             } else {
                 $ablities = [Abilities::limitedAccess()];
@@ -35,7 +36,8 @@ class TokenController extends Controller
             GetTokenEvent::dispatch($user);
             
             $dateTime       = Carbon::now();
-            $tenMinuteAfter = $dateTime->addMinutes(1);
+            // $tenMinuteAfter = $dateTime->addMinutes(10);
+            $tenMinuteAfter = $dateTime->addMinutes(10000);
 
             return $this->successResponse([
                 // add expires after one minitue

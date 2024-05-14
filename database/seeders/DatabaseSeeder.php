@@ -17,9 +17,16 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'user@mail.com',
-            'password' => Hash::make('password'),
+            'name'         => 'Test User',
+            'privilege_id' => 1,
+            'email'        => 'user@mail.com',
+            'password'     => Hash::make('password'),
+        ]);
+
+        $this->call([
+            TodoSeeder::class,
+            TaskSeeder::class,
+            PrivilegeSeeder::class,
         ]);
     }
 }
