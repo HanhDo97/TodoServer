@@ -11,9 +11,9 @@ class UserController extends Controller
     public function getInfor(Request $request)
     {
         $user  = $request->user();
-       
-        return $this->successResponse([
-           new UserResource($user)
-        ]);
+
+        return $this->successResponse(
+            new UserResource($user)
+        );
     }
 }

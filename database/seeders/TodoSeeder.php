@@ -17,7 +17,7 @@ class TodoSeeder extends Seeder
             'title' => 'Planning'
         ]);
         Todo::create([
-            'title' => 'Planning'
+            'title' => 'Deploying'
         ]);
 
         DB::table('todo_user')->insert([

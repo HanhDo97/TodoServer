@@ -12,10 +12,8 @@ class TodoCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray(Request $request)
     {
-        return [
-            $this->collection->map(fn ($todo) => new TodoResource($todo))
-        ];
+        return $this->collection->map(fn ($todo) => new TodoResource($todo));
     }
 }
