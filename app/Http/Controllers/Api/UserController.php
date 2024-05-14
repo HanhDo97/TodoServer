@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function getInfor(Request $request){
+    public function getInfor(Request $request)
+    {
         $user  = $request->user();
-        $user->todos;
+       
         return $this->successResponse([
-            $user
+           new UserResource($user)
         ]);
     }
 }
