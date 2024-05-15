@@ -10,6 +10,9 @@ class Task extends Model
 {
     use HasFactory;
 
+    protected $fillable  = ['title', 'todo_id'];
+    protected $timestamp = true;
+
     public function todo() : BelongsTo{
         return $this->belongsTo(Todo::class);
     }

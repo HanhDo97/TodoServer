@@ -24,7 +24,15 @@ Route::prefix('user')->middleware('auth:sanctum')->group(function () {
 });
 
 
-Route::middleware('auth:sanctum', 'ability:full-access')->group(function () {
-    Route::resource('todos', TodoController::class);
-    Route::resource('tasks', TaskController::class);
+Route::middleware('auth:sanctum')->group(function () {
+    // For user action
+    Route::resource('todos', TodoController::class)->only(['store', 'update']);
+    Route::resource('tasks', TaskController::class)->only(['store', 'update']);
+
+    // For admin action
+    Route::get('todos', [TodoController::class, 'index'])
+        ->name('todos.index')
+        ->middleware('ability:full-access');
+
+
 });

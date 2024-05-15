@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
+use App\Services\TaskService;
+use Exception;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -30,7 +32,20 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            // Assuming you have a validation function or use a framework's validation method
+            $task = TaskService::create($request->all());
+
+            if ($task) {
+                return $this->successResponse(
+                    $task
+                );
+            } else {
+                return $this->errorResponse('Creation failed');
+            }
+        } catch (Exception $e) {
+            return $this->errorResponse('An error occurred: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -54,7 +69,18 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            // Assuming you have a validation function or use a framework's validation method
+            $bool = TaskService::update($request->all(), $id);
+
+            if ($bool) {
+                return $this->successResponse('Updated successfully');
+            } else {
+                return $this->errorResponse('Updatation failed');
+            }
+        } catch (Exception $e) {
+            return $this->errorResponse('An error occurred: ' . $e->getMessage());
+        }
     }
 
     /**

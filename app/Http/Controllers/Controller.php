@@ -30,6 +30,11 @@ abstract class Controller
      */
     protected function errorResponse($message, $statusCode = 500): JsonResponse
     {
+        // Check if app is in debug mode
+        if (!config('app.debug')) {
+            $message = 'Server error';
+        }
+
         return response()->json([
             'success' => false,
             'error' => $message,

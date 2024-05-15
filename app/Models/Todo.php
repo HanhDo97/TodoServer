@@ -11,6 +11,8 @@ class Todo extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title'];
+
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);

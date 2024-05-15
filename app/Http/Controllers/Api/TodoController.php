@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TodoRequest;
 use App\Models\Task;
 use App\Models\Todo;
+use App\Services\TodoService;
+use Exception;
 use Illuminate\Http\Request;
 
 class TodoController extends Controller
@@ -29,25 +32,20 @@ class TodoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TodoRequest $request)
     {
-        //
-    }
+        try {
+            // Assuming you have a validation function or use a framework's validation method
+            $bool = TodoService::create($request->all(), $request->user());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+            if ($bool) {
+                return $this->successResponse('Created successfully');
+            } else {
+                return $this->errorResponse('Creation failed');
+            }
+        } catch (Exception $e) {
+            return $this->errorResponse('An error occurred: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -55,7 +53,18 @@ class TodoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            // Assuming you have a validation function or use a framework's validation method
+            $bool = TodoService::update($request->all(), $id);
+
+            if ($bool) {
+                return $this->successResponse('Updated successfully');
+            } else {
+                return $this->errorResponse('Updatation failed');
+            }
+        } catch (Exception $e) {
+            return $this->errorResponse('An error occurred: ' . $e->getMessage());
+        }
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Laravel\Sanctum\Exceptions\MissingAbilityException;
 
@@ -20,7 +21,7 @@ class CheckForAnyAbility
     public function handle($request, $next, ...$abilities)
     {
         $user = auth()->guard('sanctum')->user();
-        
+
         if (!$user || !$user->currentAccessToken()) {
             throw new AuthenticationException;
         }
@@ -31,6 +32,6 @@ class CheckForAnyAbility
             }
         }
 
-        throw new MissingAbilityException($abilities);
+        throw new AuthorizationException('This action is unauthorized');
     }
 }
