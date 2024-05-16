@@ -48,8 +48,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function todos(): BelongsToMany
+    public function projects(): BelongsToMany
     {
-        return $this->belongsToMany(Todo::class);
+        return $this->belongsToMany(Project::class);
     }
 }

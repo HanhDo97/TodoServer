@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\TodoController;
 use App\Http\Controllers\Api\TokenController;
@@ -28,10 +29,14 @@ Route::middleware('auth:sanctum')->group(function () {
     // For user action
     Route::resource('todos', TodoController::class)->only(['store', 'update']);
     Route::resource('tasks', TaskController::class)->only(['store', 'update']);
+    Route::resource('projects', ProjectController::class)->only(['store', 'update']);
 
     // For admin action
     Route::get('todos', [TodoController::class, 'index'])
         ->name('todos.index')
+        ->middleware('ability:full-access');
+    Route::get('projects', [ProjectController::class, 'index'])
+        ->name('projects.index')
         ->middleware('ability:full-access');
 
 

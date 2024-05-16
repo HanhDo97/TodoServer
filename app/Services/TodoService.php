@@ -14,9 +14,6 @@ class TodoService
         try {
             // Create the todo item using the provided data
             $todo = Todo::create($data);
-
-            if (!$todo) return false;
-            $user->todos()->attach($todo->id);
         } catch (QueryException $e) {
             $todo->delete();
             throw new Exception('The is a problem with sql query or may be lost connect to the database' . $e->getMessage());
@@ -28,9 +25,10 @@ class TodoService
         return true;
     }
 
-    public static function update($data, $id):bool{
+    public static function update($data, $id): bool
+    {
         DB::beginTransaction();
-        try{
+        try {
             $todo = Todo::findOrFail($id);
             $todo->title = $data['title'];
             $todo->save();
@@ -40,6 +38,5 @@ class TodoService
             throw new Exception($e->getMessage());
         }
         return true;
-
     }
 }

@@ -14,7 +14,7 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $todos = new TodoCollection($this->todos);
+        $projects = new ProjectCollection($this->projects);
         return [
             "id"           => $this->id,
             "name"         => $this->name,
@@ -22,7 +22,7 @@ class UserResource extends JsonResource
             "privilege_id" => $this->privilege_id,
             "created_at"   => $this->created_at,
             "updated_at"   => $this->updated_at,
-            "todos"        => $todos
+            "projects"     => $projects
         ];
     }
 }

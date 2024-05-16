@@ -14,19 +14,12 @@ class TodoSeeder extends Seeder
     public function run(): void
     {
         Todo::create([
-            'title' => 'Planning'
+            'title'      => 'Planning',
+            'project_id' => 1
         ]);
         Todo::create([
-            'title' => 'Deploying'
-        ]);
-
-        DB::table('todo_user')->insert([
-            'todo_id'   => 1,
-            'user_id'   => 1,
-        ]);
-        DB::table('todo_user')->insert([
-            'todo_id'   => 2,
-            'user_id'   => 1,
+            'title'      => 'Deploying',
+            'project_id' => 1
         ]);
     }
 }

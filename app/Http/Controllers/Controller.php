@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 abstract class Controller
 {
@@ -13,12 +14,13 @@ abstract class Controller
      * @param int $statusCode
      * @return JsonResponse
      */
-    protected function successResponse($data = [], $statusCode = 200): JsonResponse
+    protected function successResponse($data = [], $cookies = '', $statusCode = 200): Response
     {
-        return response()->json([
-            'success' => true,
-            'data' => $data,
-        ], $statusCode);
+        $response = new Response($data, $statusCode);
+        if ($cookies !== '')
+            $response->withCookie($cookies);
+
+        return $response;
     }
 
     /**

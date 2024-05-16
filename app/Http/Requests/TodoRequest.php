@@ -24,16 +24,16 @@ class TodoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'   => 'required',
-            'user_id' => 'required'
+            'title'      => 'required',
+            'project_id' => 'required'
         ];
     }
 
     public function messages(): array
     {
         return [
-            'title.required'   => 'Title is required',
-            'user_id.required' => 'User id is required',
+            'title.required'      => 'Title is required',
+            'project_id.required' => 'Project id is required',
         ];
     }
 

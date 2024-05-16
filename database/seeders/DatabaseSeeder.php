@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             TodoSeeder::class,
             TaskSeeder::class,
             PrivilegeSeeder::class,
+            ProjectSeeder::class
         ]);
     }
 }
