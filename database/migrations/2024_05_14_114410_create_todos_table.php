@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id');
             $table->string('title');
+            $table->smallInteger('order');
             $table->timestamps();
         });
     }

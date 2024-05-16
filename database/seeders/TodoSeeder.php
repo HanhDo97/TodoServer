@@ -15,11 +15,13 @@ class TodoSeeder extends Seeder
     {
         Todo::create([
             'title'      => 'Planning',
-            'project_id' => 1
+            'project_id' => 1,
+            'order'      => 1,
         ]);
         Todo::create([
             'title'      => 'Deploying',
-            'project_id' => 1
+            'project_id' => 1,
+            'order'      => 2
         ]);
     }
 }

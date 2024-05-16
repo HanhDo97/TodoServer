@@ -9,3 +9,5 @@ A. Setup
 
 B. Information
 1. Get data over laravel resource
+2. Using cookie to manage working project
+3. Using Event listenr to strack user get token login

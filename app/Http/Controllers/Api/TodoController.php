@@ -36,7 +36,7 @@ class TodoController extends Controller
     {
         try {
             // Assuming you have a validation function or use a framework's validation method
-            $bool = TodoService::create($request->all(), $request->user());
+            $bool = TodoService::create($request->all());
 
             if ($bool) {
                 return $this->successResponse('Created successfully');

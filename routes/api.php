@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\TodoController;
@@ -24,6 +25,10 @@ Route::prefix('user')->middleware('auth:sanctum')->group(function () {
     Route::get('/get', [UserController::class, 'getInfor']);
 });
 
+Route::prefix('position')->middleware('auth:sanctum')->group(function () {
+    Route::post('todos', [PositionController::class, 'updateTodo']);
+    Route::get('tasks', [PositionController::class, 'updateTask']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     // For user action
@@ -38,6 +43,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('projects', [ProjectController::class, 'index'])
         ->name('projects.index')
         ->middleware('ability:full-access');
-
-
 });

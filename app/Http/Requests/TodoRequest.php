@@ -25,6 +25,7 @@ class TodoRequest extends FormRequest
     {
         return [
             'title'      => 'required',
+            'order'      => 'required',
             'project_id' => 'required'
         ];
     }
@@ -34,6 +35,7 @@ class TodoRequest extends FormRequest
         return [
             'title.required'      => 'Title is required',
             'project_id.required' => 'Project id is required',
+            'order.required'      => 'Order is required',
         ];
     }
 

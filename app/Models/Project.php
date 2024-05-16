@@ -18,6 +18,6 @@ class Project extends Model
     }
 
     public function todos() :HasMany{
-        return $this->hasMany(Todo::class);
+        return $this->hasMany(Todo::class)->orderBy('order');
     }
 }

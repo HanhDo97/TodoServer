@@ -12,7 +12,7 @@ class Todo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'project_id'];
+    protected $fillable = ['title', 'project_id', 'order'];
 
     public function tasks(): HasMany
     {

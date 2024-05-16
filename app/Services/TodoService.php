@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Project;
 use App\Models\Todo;
 use Exception;
 use Illuminate\Database\QueryException;
@@ -9,16 +10,42 @@ use Illuminate\Support\Facades\DB;
 
 class TodoService
 {
-    public static function create($data, $user): bool
+    public static function updatePosition($data)
+    {
+        try {
+            $projectId = $data['project_id'];
+            $todos = collect($data['todos']);
+            
+            // Retrieve the project with todos eager loaded
+            $project = Project::with('todos')->findOrFail($projectId);
+
+            // Map todos by their id for easier retrieval
+            $todosById = $todos->keyBy('id');
+
+            // Iterate over project todos and update their positions if needed
+            $project->todos->each(function ($todo) use ($todosById) {
+                if ($newTodo = $todosById->get($todo->id)) {
+                    if ($todo->order !== $newTodo['order']) {
+                        $todo->order = $newTodo['order'];
+                        $todo->save();
+                    }
+                }
+            });
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public static function create($data): bool
     {
         try {
             // Create the todo item using the provided data
             $todo = Todo::create($data);
         } catch (QueryException $e) {
-            $todo->delete();
-            throw new Exception('The is a problem with sql query or may be lost connect to the database' . $e->getMessage());
+            throw new Exception('This is a problem with sql query or may be lost connect to the database' . $e->getMessage());
         } catch (Exception $e) {
-            $todo->delete();
             throw new Exception($e->getMessage());
         }
 
