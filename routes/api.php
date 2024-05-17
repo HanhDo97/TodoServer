@@ -27,7 +27,7 @@ Route::prefix('user')->middleware('auth:sanctum')->group(function () {
 
 Route::prefix('position')->middleware('auth:sanctum')->group(function () {
     Route::post('todos', [PositionController::class, 'updateTodo']);
-    Route::get('tasks', [PositionController::class, 'updateTask']);
+    Route::post('tasks', [PositionController::class, 'updateTask']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {

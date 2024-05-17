@@ -38,7 +38,7 @@ class TodoService
         }
     }
 
-    public static function create($data): bool
+    public static function create($data): bool | Todo
     {
         try {
             // Create the todo item using the provided data
@@ -49,7 +49,7 @@ class TodoService
             throw new Exception($e->getMessage());
         }
 
-        return true;
+        return $todo;
     }
 
     public static function update($data, $id): bool

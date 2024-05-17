@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('todo_id');
             $table->string('title');
+            $table->smallInteger('order')->nullable();
             $table->timestamps();
         });
     }

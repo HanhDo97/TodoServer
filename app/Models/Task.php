@@ -10,7 +10,7 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable  = ['title', 'todo_id'];
+    protected $fillable  = ['title', 'todo_id','order'];
     protected $timestamp = true;
 
     public function todo() : BelongsTo{
