@@ -14,7 +14,7 @@ class Project extends Model
     protected $fillable = ['title', 'id_user_owner'];
 
     public function users() :BelongsToMany{ 
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('project_id', 'user_id', 'role');
     }
 
     public function todos() :HasMany{
