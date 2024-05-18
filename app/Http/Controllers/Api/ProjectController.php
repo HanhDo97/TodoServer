@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Services\ProjectService;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -16,6 +19,21 @@ class ProjectController extends Controller
         $projects = Project::with('users')->get();
 
         return $this->successResponse($projects);
+    }
+
+    public function getUsers(Request $request)
+    {
+        try {
+            $user = $request->user();
+
+            $data = ProjectService::getUsers($request->project_id, $user);
+
+            return $this->successResponse($data);
+        } catch (AuthorizationException $e) {
+            return $this->errorResponse($e->getMessage());
+        } catch (Exception $e) {
+            return $this->errorResponse($e->getMessage());
+        }
     }
 
     /**

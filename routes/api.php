@@ -9,10 +9,6 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
 Route::prefix('token')->middleware('auth:sanctum')->group(function () {
 
     Route::post('/get', [TokenController::class, 'getToken'])->withoutMiddleware('auth:sanctum');
@@ -21,17 +17,18 @@ Route::prefix('token')->middleware('auth:sanctum')->group(function () {
         ->middleware('auth:sanctum');
 });
 
-Route::prefix('user')->middleware('auth:sanctum')->group(function () {
-    Route::get('/get', [UserController::class, 'getInfor']);
-});
-
-Route::prefix('position')->middleware('auth:sanctum')->group(function () {
-    Route::post('todos', [PositionController::class, 'updateTodo']);
-    Route::post('tasks', [PositionController::class, 'updateTask']);
-});
-
 Route::middleware('auth:sanctum')->group(function () {
-    // For user action
+    Route::prefix('user')->group(function () {
+        Route::get('/get', [UserController::class, 'getInfor']);
+    });
+
+    Route::prefix('position')->group(function () {
+        Route::post('todos', [PositionController::class, 'updateTodo']);
+        Route::post('tasks', [PositionController::class, 'updateTask']);
+    });
+
+    Route::get('/project/get_users', [ProjectController::class, 'getUsers']);
+
     Route::resource('todos', TodoController::class)->only(['store', 'update']);
     Route::resource('tasks', TaskController::class)->only(['store', 'update']);
     Route::resource('projects', ProjectController::class)->only(['store', 'update']);
