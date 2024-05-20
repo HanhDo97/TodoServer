@@ -10,4 +10,6 @@ A. Setup
 B. Information
 1. Get data over laravel resource
 2. Using cookie to manage working project
-3. Using Event listenr to strack user get token login
+3. Using Event listener to strack user get token login
+4. Using Notification Event to send email, notifications to user
+5. Using Laravel Pusher to send notifications in realtime

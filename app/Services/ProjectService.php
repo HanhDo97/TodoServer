@@ -12,6 +12,10 @@ use Ramsey\Uuid\Type\Integer;
 
 class ProjectService
 {
+    public static function find($id){
+        return Project::findOrFail($id);
+    }
+
     public static function getUsers(int $projectId, User $user)
     {
         $project = Project::findOrFail($projectId)->with('users')->first();

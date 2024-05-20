@@ -20,6 +20,8 @@ Route::prefix('token')->middleware('auth:sanctum')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/get', [UserController::class, 'getInfor']);
+        Route::get('/s_e_n', [UserController::class, 'searchEmailOrName']);
+        Route::get('/i_u', [UserController::class, 'inviteUser']);
     });
 
     Route::prefix('position')->group(function () {

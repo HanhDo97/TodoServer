@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\GetTokenEvent;
+use App\Events\InviteNotificationEvent;
 use App\Listeners\LoginHistoryListener;
+use App\Listeners\SendInviteProjectListener;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(
             GetTokenEvent::class,
             LoginHistoryListener::class
+        );
+        Event::listen(
+            InviteNotificationEvent::class,
+            SendInviteProjectListener::class
         );
     }
 }
