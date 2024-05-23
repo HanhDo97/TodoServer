@@ -18,8 +18,8 @@ class ProjectService
 
     public static function getUsers(int $projectId, User $user)
     {
-        $project = Project::findOrFail($projectId)->with('users')->first();
-
+        $project = Project::find($projectId);
+        
         // Check if the user exists in the project's users
         $isUserExists = $project->users->contains($user->id);
 

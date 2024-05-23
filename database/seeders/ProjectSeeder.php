@@ -32,5 +32,10 @@ class ProjectSeeder extends Seeder
             'user_id'    => 2,
             'role'       => 'member'
         ]);
+        DB::table('project_user')->insert([
+            'project_id' => 2,
+            'user_id'    => 1,
+            'role'       => 'member'
+        ]);
     }
 }

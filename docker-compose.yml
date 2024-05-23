@@ -27,6 +27,7 @@ services:
       context: .
       dockerfile: ./docker/php/Dockerfile
     container_name: todo_server
+    restart: always
     volumes:
       - .:/var/www
     networks:

@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/get', [UserController::class, 'getInfor']);
         Route::get('/s_e_n', [UserController::class, 'searchEmailOrName']);
         Route::get('/i_u', [UserController::class, 'inviteUser']);
+        Route::get('/notifications', [UserController::class,'getNotifications']);
     });
 
     Route::prefix('position')->group(function () {

@@ -2,12 +2,13 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class InviteProjectNotification extends Notification implements ShouldQueue
+class InviteProjectNotification extends Notification
 {
     use Queueable;
 
@@ -29,7 +30,8 @@ class InviteProjectNotification extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        // return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -50,10 +52,17 @@ class InviteProjectNotification extends Notification implements ShouldQueue
      *
      * @return array<string, mixed>
      */
-    public function toArray(object $notifiable): array
+    public function toArray(User $user): array
     {
+        $userFrom = auth()->guard('sanctum')->user();
+        $userTo   = $user;
+        $message  = "You have received an inviting to join a board <a>" . $this->project->title . "</a>";
         return [
-            //
+            'userFrom' => $userFrom,
+            'userTo'   => $userTo,
+            'project'  => $this->project,
+            'role'     => $this->role,
+            'message'  => $message
         ];
     }
 }

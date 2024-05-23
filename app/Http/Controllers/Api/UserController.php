@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Events\InviteNotificationEvent;
+use App\Events\InviteUserEvent;
 use App\Events\InviteProjectBroadcastEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function getNotifications(Request $request){
+        $user = $request->user();
+
+        return $this->successResponse($user->notifications);
+    }
+
     public function inviteUser(Request $request)
     {
         ValidateService::validateRequired($request, ['uI', 'rC', 'pI']);
@@ -25,9 +31,7 @@ class UserController extends Controller
             'project' => $project,
         ];
         
-        
-        InviteNotificationEvent::dispatch($data);
-        event(new InviteProjectBroadcastEvent($data));
+        InviteUserEvent::dispatch($data);
 
         return
             $this->successResponse(['message'=>'We have sent a consent message to '.$user->name]);

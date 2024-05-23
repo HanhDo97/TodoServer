@@ -25,6 +25,6 @@ class SendInviteProjectListener
         $project = $event->data['project'];
         $role    = $event->data['role'];
         
-        // Notification::send($user, new InviteProjectNotification($project,$role));
+        Notification::send($user, new InviteProjectNotification($project,$role));
     }
 }
