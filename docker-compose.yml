@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  todo_web:
+  todo_web_prod:
     image: nginx:latest
-    container_name: todo-web
+    container_name: todo_web_prod
     ports:
       - "80:80"
     volumes:

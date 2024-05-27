@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Events\InviteUserEvent;
 use App\Events\InviteProjectBroadcastEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\NotificationCollection;
 use App\Http\Resources\UserResource;
 use App\Services\ProjectService;
 use App\Services\ValidateService;
@@ -15,8 +16,9 @@ class UserController extends Controller
 {
     public function getNotifications(Request $request){
         $user = $request->user();
-
-        return $this->successResponse($user->notifications);
+        $data = new NotificationCollection($user->notifications);
+        
+        return $this->successResponse($data);
     }
 
     public function inviteUser(Request $request)

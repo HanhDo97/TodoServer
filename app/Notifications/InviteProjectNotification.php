@@ -56,7 +56,7 @@ class InviteProjectNotification extends Notification
     {
         $userFrom = auth()->guard('sanctum')->user();
         $userTo   = $user;
-        $message  = "You have received an inviting to join a board <a>" . $this->project->title . "</a>";
+        $message  = "You have received an inviting to join a board";
         return [
             'userFrom' => $userFrom,
             'userTo'   => $userTo,
