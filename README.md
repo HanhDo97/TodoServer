@@ -6,6 +6,7 @@ A. Setup
 7. sudo docker exec todo_server php artisan key:generate
 8. sudo docker exec todo_server php artisan migrate --seed
 9. sudo docker exec todo_server php artisan config:cache
+10. Run queu:work in background in log to queue.log: nohup php artisan queue:work --daemon >> storage/logs/queue.log &
 
 B. Information
 1. Get data over laravel resource
